@@ -1,0 +1,1 @@
+DELETE from {table name} where Condition;
