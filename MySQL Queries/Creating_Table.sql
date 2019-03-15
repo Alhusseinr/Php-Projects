@@ -1,3 +1,1 @@
-CREATE TABLE {Table Name}(
-	'FieldName'
-)
+Select * from books;

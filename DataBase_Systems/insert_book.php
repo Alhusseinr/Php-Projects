@@ -6,7 +6,6 @@
         <h1>Book-O-Rama Book Entry Results</h1>
         <?php
             // short var name
-            $Id = $_POST['Id'];
             $isbn = $_POST['isbn'];
             $author = $_POST['author'];
             $title = $_POST['title'];
@@ -18,7 +17,6 @@
             }
 
             if(!get_magic_quotes_gpc()){
-                $Id = addslashes($Id);
                 $isbn = addslashes($isbn);
                 $author = addslashes($author);
                 $title = addslashes($title);
