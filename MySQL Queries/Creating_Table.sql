@@ -1,1 +1,1 @@
-Select * from books;
+SELECT * FROM users;
