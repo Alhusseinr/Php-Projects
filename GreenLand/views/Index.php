@@ -23,10 +23,6 @@
         <link rel="stylesheet" href="../public/css/style.css" type="text/css" />
     </head>
     <body>
-    <?php include ('nav.html')?>
-        <div class="header">
-            <h2>Home Page</h2>
-        </div>
         <div class="content">
             <?php if(isset($_SESSION['success'])) : ?>
                 <div class="error success">
@@ -38,13 +34,55 @@
                     </h3>
                 </div>
             <?php endif; ?>
-
-            <!-- Info -->
-            <?php if(isset($_SESSION['username'])) : ?>
-                <p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
-                <p> <a href="login.php?logout='1'" style="color: red;">logout</a> </p>
-            <?php endif ?>
         </div>
+
+        <section class="container">
+            <?php include('nav.html')?>
+            <section id="mainBody">
+                <div class="row">
+                    <div class="col-md-3" id="filter">
+                        <div class="inner" style="border-right: 1px solid lightgray;">
+                            <ul>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <?php include('results.php')?>
+                    </div>
+                </div>
+            </section>
+        </section>
+
         <!--<section class="mainBanner img gradient">
             <div class="container">
                 <div class="row centered text-center">

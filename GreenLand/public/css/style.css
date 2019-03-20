@@ -111,6 +111,13 @@ html {
     text-align: center;
     padding-top: .25em;
 }
+#filter ul{
+    padding: 0px;
+}
+
+#filter ul li{
+    list-style: none;
+}
 /*
 
 
