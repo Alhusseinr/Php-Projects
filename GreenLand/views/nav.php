@@ -1,3 +1,4 @@
+<?php include('server.php') ?>
 <section id="topNav">
     <?php if(isset($_SESSION['username'])) : ?>
     <div class="row" style="margin-top: 1em;">
@@ -14,10 +15,12 @@
 <section id="searchBar">
     <div class="row">
         <div class="input-group my-2 mb-3 col-md-12">
-            <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-success" type="button">Search</button>
-            </div>
+            <form method="post" action="nav.php" id="searchForm">
+                <input type="text" name="searchTerm" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit" name="searchSubmit">Search</button>
+                </div>
+            </form>
         </div>
     </div>
 </section>

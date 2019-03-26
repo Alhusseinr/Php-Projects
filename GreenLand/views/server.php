@@ -82,3 +82,13 @@
             }
         }
     }
+
+// Search
+
+    $searchTerm;
+
+    if(isset($_POST['searchSubmit'])){
+        if(empty($searchTerm)){
+            array_push($errors, "Please enter a search term");
+        }
+    }

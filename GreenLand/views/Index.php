@@ -23,21 +23,21 @@
         <link rel="stylesheet" href="../public/css/style.css" type="text/css" />
     </head>
     <body>
-        <div class="content">
-            <?php if(isset($_SESSION['success'])) : ?>
+<!--        <div class="content">
+            <?php /*if(isset($_SESSION['success'])) : */?>
                 <div class="error success">
                     <h3>
                         <?php
-                            echo $_SESSION['success'];
+/*                            echo $_SESSION['success'];
                             unset($_SESSION['success']);
-                        ?>
+                        */?>
                     </h3>
                 </div>
-            <?php endif; ?>
-        </div>
+            <?php /*endif; */?>
+        </div>-->
 
         <section class="container">
-            <?php include('nav.html')?>
+            <?php include('nav.php') ?>
             <section id="mainBody">
                 <div class="row">
                     <div class="col-md-3" id="filter">
@@ -46,31 +46,19 @@
                                 <li>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        <label class="form-check-label" for="exampleCheck1">Milk</label>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        <label class="form-check-label" for="exampleCheck1">Yogurt</label>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        <label class="form-check-label" for="exampleCheck1">Cheese</label>
                                     </div>
                                 </li>
                             </ul>
