@@ -1,11 +1,10 @@
 <?php
-    session_start();
-
 // Register
 
     // my vars
     $username;
     $email;
+    $searchTerm;
     $errors = array();
 
     // db connection
@@ -84,11 +83,19 @@
     }
 
 // Search
-
-    $searchTerm;
-
     if(isset($_POST['searchSubmit'])){
-        if(empty($searchTerm)){
-            array_push($errors, "Please enter a search term");
+        $searchTerm = $_GET['searchTerm']; // Gets the data from the client-side
+        $searchTerm = htmlspecialchars($searchTerm); // Transforms everything from Html to actual text
+        $searchTerm = mysqli_real_escape_string($db, $_POST['searchTerm']); // Helps against SQL injections
+
+        $searchQuery = "SELECT * FROM Products WHERE(`name` LIKE `%".$searchTerm."%`) OR ('description' LIKE `%".$searchTerm."%`)";
+        $searchResults = mysqli_query($db, $searchQuery);
+
+        if(mysqli_num_rows($searchResults) > 0){
+            while($results = mysqli_fetch_array($searchResults)){
+                echo $results;
+            }
         }
+
+
     }

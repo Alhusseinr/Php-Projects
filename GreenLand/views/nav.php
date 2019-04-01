@@ -12,15 +12,20 @@
     </div>
     <?php endif ?>
 </section>
-<section id="searchBar">
+<section id="searchBar" style="margin-top:.75em;">
     <div class="row">
-        <div class="input-group my-2 mb-3 col-md-12">
-            <form method="post" action="nav.php" id="searchForm">
-                <input type="text" name="searchTerm" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-success" type="submit" name="searchSubmit">Search</button>
+        <form method="post" action="index.php" id="searchForm" style="width: 100%;">
+            <div class="col-md-12">
+                <div class="input-group mb-3">
+                    <input name="searchTerm" type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success" name="searchSubmit" type="submit">Search</button>
+                    </div>
                 </div>
-            </form>
-        </div>
+            </div>
+            <div class="col-md-12">
+                <?php include('errors.php')?>
+            </div>
+        </form>
     </div>
 </section>

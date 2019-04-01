@@ -23,19 +23,6 @@
         <link rel="stylesheet" href="../public/css/style.css" type="text/css" />
     </head>
     <body>
-<!--        <div class="content">
-            <?php /*if(isset($_SESSION['success'])) : */?>
-                <div class="error success">
-                    <h3>
-                        <?php
-/*                            echo $_SESSION['success'];
-                            unset($_SESSION['success']);
-                        */?>
-                    </h3>
-                </div>
-            <?php /*endif; */?>
-        </div>-->
-
         <section class="container">
             <?php include('nav.php') ?>
             <section id="mainBody">
@@ -70,23 +57,6 @@
                 </div>
             </section>
         </section>
-
-        <!--<section class="mainBanner img gradient">
-            <div class="container">
-                <div class="row centered text-center">
-                    <div class="txtWhite">
-                        <h1>
-                            Place an order today
-                        </h1>
-                        <h3>
-                            Deliver anywhere you want whenever you want
-                        </h3>
-
-                        <a href="#" class="btn btn-warning">Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </section>-->
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
