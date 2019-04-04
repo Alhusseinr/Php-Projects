@@ -26,7 +26,7 @@ create table user(
   Bdate datetime NOT NULL,
   email varchar(2000) NOT NULL,
   Pnumber varchar(200) NOT NULL,
-  order_Id int NOT NULL,
+  order_Id int NULL,
   Gender ENUM('Male', 'Female', 'Other'),
   role ENUM('Customer', 'Employee', 'Supervisor'),
   constraint fk1 foreign key (order_Id) references orders(order_Id) ON UPDATE CASCADE
