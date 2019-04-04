@@ -13,12 +13,16 @@
             <form method="post" action="register.php">
                 <div class="row">
                     <div class="col-md-6" style="margin-top: 1em;">
-                        <label>Username: </label>
-                        <input class="form-control" type="text" name="username" autocomplete="off">
+                        <label>First Name: </label>
+                        <input class="form-control" type="text" name="Fname" autocomplete="off">
                     </div>
                     <div class="col-md-6" style="margin-top: 1em;">
-                        <label>Email: </label>
-                        <input class="form-control" type="email" name="email" autocomplete="off">
+                        <label>Last Name: </label>
+                        <input class="form-control" type="text" name="Lname" autocomplete="off">
+                    </div>
+                    <div class="col-md-6" style="margin-top: 1em;">
+                        <label>Username: </label>
+                        <input class="form-control" type="text" name="username" autocomplete="off">
                     </div>
                     <div class="col-md-6" style="margin-top: 1em;">
                         <label>Password: </label>
@@ -27,6 +31,35 @@
                     <div class="col-md-6" style="margin-top: 1em;">
                         <label>Confirm Password: </label>
                         <input class="form-control" type="password" name="password_2" autocomplete="off">
+                    </div>
+                    <div class="col-md-6" style="margin-top: 1em;">
+                        <label>Date of birth: </label>
+                        <input class="form-control" type="date" name="Bdate" autocomplete="off">
+                    </div>
+                    <div class="col-md-6" style="margin-top: 1em;">
+                        <label>Email: </label>
+                        <input class="form-control" type="email" name="email" autocomplete="off">
+                    </div>
+                    <div class="col-md-6" style="margin-top: 1em;">
+                        <label>Phone Number: </label>
+                        <input class="form-control" type="number" name="Pnumber" autocomplete="off">
+                    </div>
+                    <div class="col-md-6" style="margin-top: 1em;">
+                        <label>Gender:</label>
+                        <select name="Gender" class="form-control">
+                            <option>Select...</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 1em;">
+                        <label>Role:</label>
+                        <select name="role" class="form-control">
+                            <option>Select...</option>
+                            <option value="Customer">Customer</option>
+                            <option value="Employee">Employee</option>
+                            <option value="Supervisor">Supervisor</option>
+                        </select>
                     </div>
                     <div class="col-md-6" style="margin-top: 1em;">
                         <?php include('errors.php') ?>
