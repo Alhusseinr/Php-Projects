@@ -33,16 +33,8 @@
                         <input class="form-control" type="password" name="password_2" autocomplete="off">
                     </div>
                     <div class="col-md-6" style="margin-top: 1em;">
-                        <label>Date of birth: </label>
-                        <input class="form-control" type="date" name="Bdate" autocomplete="off">
-                    </div>
-                    <div class="col-md-6" style="margin-top: 1em;">
                         <label>Email: </label>
                         <input class="form-control" type="email" name="email" autocomplete="off">
-                    </div>
-                    <div class="col-md-6" style="margin-top: 1em;">
-                        <label>Phone Number: </label>
-                        <input class="form-control" type="number" name="Pnumber" autocomplete="off">
                     </div>
                     <div class="col-md-6" style="margin-top: 1em;">
                         <label>Gender:</label>
