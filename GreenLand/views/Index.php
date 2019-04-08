@@ -18,9 +18,7 @@
         <meta charset="utf-8">
         <title>Greenland Diary</title>
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-        <link rel="stylesheet" href="../public/css/style.css" type="text/css" />
+        <?php include('topScripts.php') ?>
     </head>
     <body>
         <section class="container">
@@ -57,10 +55,7 @@
                 </div>
             </section>
         </section>
-
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <?php include('bottomScripts.php') ?>
     </body>
 </html>
 
