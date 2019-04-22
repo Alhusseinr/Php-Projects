@@ -33,6 +33,7 @@
     <Folder Include="js\" />
     <Folder Include="login\" />
     <Folder Include="account\" />
+    <Folder Include="JSON_DATA\" />
     <Folder Include="register\" />
     <Folder Include="server\" />
     <Folder Include="UserControls\" />
@@ -40,5 +41,6 @@
   <ItemGroup>
     <Content Include="css\Style.css" />
     <Content Include="favicon.ico" />
+    <Content Include="JSON_DATA\swapi.json" />
   </ItemGroup>
 </Project>
