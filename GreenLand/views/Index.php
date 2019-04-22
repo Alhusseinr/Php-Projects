@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION['username'])){
+    if(!isset($_COOKIE['login'])){
         $_SESSION['msg'] = "You must log in first";
         header('location: login.php');
     }
@@ -25,31 +25,38 @@
             <?php include('nav.php') ?>
             <section id="mainBody">
                 <div class="row">
-                    <div class="col-md-3" id="filter">
-                        <div class="inner" style="border-right: 1px solid lightgray;">
-                            <ul>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Milk</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Yogurt</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Cheese</label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
+<!--                    <div class="col-md-3" id="filter">-->
+<!--                        <div class="inner" style="border-right: 1px solid lightgray;">-->
+<!--                            <ul>-->
+<!--                                <li>-->
+<!--                                    <div class="form-check">-->
+<!--                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--                                        <label class="form-check-label" for="exampleCheck1">Milk</label>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <div class="form-check">-->
+<!--                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--                                        <label class="form-check-label" for="exampleCheck1">Yogurt</label>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <div class="form-check">-->
+<!--                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--                                        <label class="form-check-label" for="exampleCheck1">Cheese</label>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="col-md-12">
+                        <?php if(isset($_COOKIE['login'])){
+                            echo "cookie is set "."               ";
+                            echo $_COOKIE['login'];
+                        }else{
+                            echo "cookie is not set";
+                        }
+                        ?>
                         <?php include('results.php')?>
                     </div>
                 </div>

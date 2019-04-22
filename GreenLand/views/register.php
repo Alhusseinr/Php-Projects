@@ -13,14 +13,6 @@
             <form method="post" action="register.php">
                 <div class="row">
                     <div class="col-md-6" style="margin-top: 1em;">
-                        <label>First Name: </label>
-                        <input class="form-control" type="text" name="Fname" autocomplete="off">
-                    </div>
-                    <div class="col-md-6" style="margin-top: 1em;">
-                        <label>Last Name: </label>
-                        <input class="form-control" type="text" name="Lname" autocomplete="off">
-                    </div>
-                    <div class="col-md-6" style="margin-top: 1em;">
                         <label>Username: </label>
                         <input class="form-control" type="text" name="username" autocomplete="off">
                     </div>
@@ -35,14 +27,6 @@
                     <div class="col-md-6" style="margin-top: 1em;">
                         <label>Email: </label>
                         <input class="form-control" type="email" name="email" autocomplete="off">
-                    </div>
-                    <div class="col-md-6" style="margin-top: 1em;">
-                        <label>Gender:</label>
-                        <select name="Gender" class="form-control">
-                            <option>Select...</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
                     </div>
                     <div class="col-md-6" style="margin-top: 1em;">
                         <label>Role:</label>

@@ -1,0 +1,44 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Name>Databse_systems</Name>
+    <ProjectGuid>61e5f9ca-ae79-4823-affa-5011ab6dfb32</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>
+    </RootNamespace>
+    <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
+    <AssemblyName>Databse_systems</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <IncludeDebugInformation>true</IncludeDebugInformation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <IncludeDebugInformation>false</IncludeDebugInformation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="account\Default.php" />
+    <Compile Include="errors.php" />
+    <Compile Include="index.php" />
+    <Compile Include="login\Default.php" />
+    <Compile Include="register\Default.php" />
+    <Compile Include="server\Default.php" />
+    <Compile Include="UserControls\bottomScripts.php" />
+    <Compile Include="UserControls\Footer.php" />
+    <Compile Include="UserControls\NavBar.php" />
+    <Compile Include="UserControls\topScripts.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="css\" />
+    <Folder Include="images\" />
+    <Folder Include="js\" />
+    <Folder Include="login\" />
+    <Folder Include="account\" />
+    <Folder Include="register\" />
+    <Folder Include="server\" />
+    <Folder Include="UserControls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\Style.css" />
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+</Project>

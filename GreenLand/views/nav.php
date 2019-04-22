@@ -1,6 +1,6 @@
 <?php include('server.php') ?>
 <section id="topNav">
-    <?php if(isset($_SESSION['username'])) : ?>
+    <?php if(isset($_COOKIE['login'])) : ?>
     <div class="row" style="margin-top: 1em;">
         <div class="col-md-4">
             <h3>Welcome <strong><?php echo $_SESSION['username']; ?></strong></h3>

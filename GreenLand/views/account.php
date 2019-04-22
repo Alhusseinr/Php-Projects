@@ -1,6 +1,6 @@
 <?php
     $db = mysqli_connect('localhost', 'root', '', 'database_systems');
-    $sql = "SELECT * FROM user";
+    $sql = "SELECT * FROM users";
     $result = mysqli_query($db, $sql);
     $data = mysqli_fetch_assoc($result);
 ?>
@@ -110,7 +110,7 @@
 <section class="container">
     <div class="row">
         <div class="col-md-12">
-            <span><strong>Gender: </strong><?php echo $data['Gender']; ?></span>
+            <span><strong>Gender: </strong><?php echo $data['username']; ?></span>
         </div>
     </div>
 </section>
