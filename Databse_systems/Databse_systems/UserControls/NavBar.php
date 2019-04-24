@@ -1,30 +1,16 @@
-<?php include('../server/Default.php') ?>
+<?php
 
-<!--<section id="topNav">
-    <?php if(isset($_COOKIE['login'])) : ?>
-    <div class="row" style="margin-top: 1em;">
-        <div class="col-md-4">
-            <h3>
-                Welcome
-                <strong>
-                    <?php echo $_SESSION['username']; ?>
-                </strong>
-            </h3>
-        </div>
-        <div class="col-md-8" style="text-align: right !important;"></div>
-    </div>
-    <?php endif ?>
-</section>
-<section id="searchBar" style="margin-top:.75em;">
-    <div class="row">
-        <form method="post" action="index.php" id="searchForm" style="width: 100%;">
-            <div class="col-md-12"></div>
-            <div class="col-md-12">
-                <?php include('errors.php')?>
-            </div>
-        </form>
-    </div>
-</section>-->
+require(dirname(__FILE__)."/DBconfig.php");
+
+$username = $_SESSION['username'];
+
+
+$query = "CALL GetRole('$username')";
+$result = mysqli_query($db, $query);
+$data = mysqli_fetch_assoc($result);
+
+?>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <a class="navbar-brand" href="#">Collectables Shop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,22 +42,23 @@
             </li>
         </ul>
         <ul class="navbar-nav pull-sm-right">
+            <?php if($data['role'] == 'admin'): ?>
+            <li class="nav-item">
+                <a href="./manage_site/Default.php" class="btn btn-outline-secondary" style="margin-right: .5em;">Manage Site</a>
+            </li>
+            <?php endif;  ?>
             <li class="nav-item">
                 <a href="account.php" class="btn btn-outline-primary" style="margin-right: .5em;">
-                    <!--<span style="font-size:12px;">
-                        Welcome <?php echo $_SESSION['username'] ?>
-                    </span>
-                    <br />-->
-                    <span>Account</span>
+                    <span>Account <?php echo $_SESSION['username'] ?></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="btn btn-outline-info my-2 my-sm-0" style="margin-right:.5em;">
+                    <i class="fas fa-shopping-cart"></i> Cart
                 </a>
             </li>
             <li class="nav-item">
                 <a href="../login/Default.php?logout='1'" class="btn btn-outline-danger my-2 my-sm-0" style="margin-right:.5em;">Logout</a>
-            </li>
-            <li class="nav-item">
-                <a href="" class="btn btn-outline-info my-2 my-sm-0">
-                    <i class="fas fa-shopping-cart"></i> Cart
-                </a>
             </li>
         </ul>
     </div>

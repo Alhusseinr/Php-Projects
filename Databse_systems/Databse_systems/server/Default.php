@@ -9,7 +9,7 @@ $role;
 $errors = array();
 
 // My DB connection
-$db = mysqli_connect('localhost', 'root', '', 'database_systems');
+$DB = mysqli_connect('localhost', 'root', '', 'database_systems');
 
 
 // Register
@@ -21,9 +21,9 @@ if(isset($_POST['reg_user'])){
     }
 
     // Fetching the values of each variable
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $password = mysqli_real_escape_string($db, $_POST['password_1']);
-    $email = mysqli_real_escape_string($db, $_POST['email']);
+    $username = mysqli_real_escape_string($DB, $_POST['username']);
+    $password = mysqli_real_escape_string($DB, $_POST['password_1']);
+    $email = mysqli_real_escape_string($DB, $_POST['email']);
 
     // Validations
     if(empty($username)){
@@ -40,7 +40,7 @@ if(isset($_POST['reg_user'])){
 
     // MySql Query checking the DB if the user exists
     $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
-    $result = mysqli_query($db, $user_check_query);
+    $result = mysqli_query($DB, $user_check_query);
     $user = mysqli_fetch_assoc($result);
 
     // If a user or email exists
@@ -59,8 +59,8 @@ if(isset($_POST['reg_user'])){
             // Hashing the password
             $hashed_password = md5($password);
             // MySql query to insert into DB
-            $query = "INSERT INTO users (username, email, Password) VALUES('$username', '$email', '$hashed_password')";
-            mysqli_query($db, $query);
+            $query = "CALL CreateUser('$username','$email','$hashed_password')";
+            mysqli_query($DB, $query);
             header("location: /login/Default.php");
         }
     }
@@ -72,9 +72,8 @@ if(isset($_POST['reg_user'])){
 
 //Login
 if(isset($_POST['login_user'])){
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $password = mysqli_real_escape_string($db, $_POST['password']);
-    $secret_word = "Ramis Shop 1998";
+    $username = mysqli_real_escape_string($DB, $_POST['username']);
+    $password = mysqli_real_escape_string($DB, $_POST['password']);
 
     if(empty($username)){
         array_push($errors, "Username is required");
@@ -86,13 +85,14 @@ if(isset($_POST['login_user'])){
 
     if(count($errors) == 0){
         $password = md5($password);
-        $find_user_query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-        $results = mysqli_query($db, $find_user_query);
+        $find_user_query = "CALL LogInUser('$username', '$password')";
+        $results = mysqli_query($DB, $find_user_query);
         $user = mysqli_fetch_assoc($results);
 
-        if(mysqli_num_rows($results) == 1){
+        if(mysqli_num_rows($results) > 1){
             $_SESSION['username'] = $username;
             $_SESSION['success'] = 'You are now logged in';
+
 
             header('location: ../index.php');
         }else{
@@ -100,7 +100,6 @@ if(isset($_POST['login_user'])){
         }
     }
 }
-
 
 
 ?>

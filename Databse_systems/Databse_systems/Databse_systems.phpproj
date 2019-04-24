@@ -20,7 +20,9 @@
     <Compile Include="errors.php" />
     <Compile Include="index.php" />
     <Compile Include="login\Default.php" />
+    <Compile Include="manage_site\Default.php" />
     <Compile Include="register\Default.php" />
+    <Compile Include="UserControls\DBconfig.php" />
     <Compile Include="server\Default.php" />
     <Compile Include="UserControls\bottomScripts.php" />
     <Compile Include="UserControls\Footer.php" />
@@ -34,6 +36,7 @@
     <Folder Include="login\" />
     <Folder Include="account\" />
     <Folder Include="JSON_DATA\" />
+    <Folder Include="manage_site\" />
     <Folder Include="register\" />
     <Folder Include="server\" />
     <Folder Include="UserControls\" />

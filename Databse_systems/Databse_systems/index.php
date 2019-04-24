@@ -16,11 +16,6 @@ if(isset($_GET['logout'])){
     header('location: /login/Default.php');
 }
 
-$db = mysqli_connect('localhost', 'root', '', 'database_systems');
-$query = "SELECT * FROM products ORDER BY product_id ASC";
-$result = mysqli_query($db, $query);
-
-
 ?>
 
 <html>
@@ -34,7 +29,7 @@ $result = mysqli_query($db, $query);
     <?php include('./UserControls/topScripts.php'); ?>
 </head>
 <body>
-    <?php include('./UserControls/NavBar.php'); ?>
+    <?php include('./UserControls/NavBar.php');  ?>
     <section id="mainBody">
         <!--<iframe src="https://vlipsy.com/embed/J1JL9As0?loop=1&sharing=0" style="height:100%; width:100%;" frameborder="0"></iframe>-->
         <!--<video autoplay muted loop id="">
@@ -87,6 +82,10 @@ $result = mysqli_query($db, $query);
             <div class="col-md-12">
                 <div class="row">
                     <?php
+
+                    $query_getProducts = "CALL GetAllProducts";
+                    $result = mysqli_query($db, $query_getProducts);
+
                     if($result):
                         if(mysqli_num_rows($result) > 0):
                             while($product = mysqli_fetch_assoc($result)):
