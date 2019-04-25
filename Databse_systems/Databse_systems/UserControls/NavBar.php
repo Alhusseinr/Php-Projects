@@ -1,13 +1,8 @@
 <?php
 
-require(dirname(__FILE__)."/DBconfig.php");
+require(dirname(__FILE__)."../../server/Default.php");
 
 $username = $_SESSION['username'];
-
-
-$query = "CALL GetRole('$username')";
-$result = mysqli_query($db, $query);
-$data = mysqli_fetch_assoc($result);
 
 ?>
 
@@ -42,7 +37,7 @@ $data = mysqli_fetch_assoc($result);
             </li>
         </ul>
         <ul class="navbar-nav pull-sm-right">
-            <?php if($data['role'] == 'admin'): ?>
+            <?php if($_SESSION['role'] == 'admin'): ?>
             <li class="nav-item">
                 <a href="./manage_site/Default.php" class="btn btn-outline-secondary" style="margin-right: .5em;">Manage Site</a>
             </li>

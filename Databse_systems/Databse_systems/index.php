@@ -29,7 +29,14 @@ if(isset($_GET['logout'])){
     <?php include('./UserControls/topScripts.php'); ?>
 </head>
 <body>
-    <?php include('./UserControls/NavBar.php');  ?>
+    <?php
+
+    include('./UserControls/NavBar.php');
+
+    $query_getProducts = "CALL GetAllProducts";
+    $products = mysqli_query($DB, $query_getProducts);
+
+    ?>
     <section id="mainBody">
         <!--<iframe src="https://vlipsy.com/embed/J1JL9As0?loop=1&sharing=0" style="height:100%; width:100%;" frameborder="0"></iframe>-->
         <!--<video autoplay muted loop id="">
@@ -83,12 +90,9 @@ if(isset($_GET['logout'])){
                 <div class="row">
                     <?php
 
-                    $query_getProducts = "CALL GetAllProducts";
-                    $result = mysqli_query($db, $query_getProducts);
-
-                    if($result):
-                        if(mysqli_num_rows($result) > 0):
-                            while($product = mysqli_fetch_assoc($result)):
+                    if($products):
+                        if(mysqli_num_rows($products) > 0):
+                            while($product = mysqli_fetch_assoc($products)):
                     ?>
                     <div class="col-sm-4 col-md-3" style="text-align: center;">
                         <form method="post" action="index.php?action=add&id=id=<?php $product['product_id']; ?>">

@@ -39,7 +39,7 @@ if(isset($_POST['reg_user'])){
     }
 
     // MySql Query checking the DB if the user exists
-    $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
+    $user_check_query = "CALL CheckIfUserExists($username, $email)";
     $result = mysqli_query($DB, $user_check_query);
     $user = mysqli_fetch_assoc($result);
 
@@ -59,8 +59,8 @@ if(isset($_POST['reg_user'])){
             // Hashing the password
             $hashed_password = md5($password);
             // MySql query to insert into DB
-            $query = "CALL CreateUser('$username','$email','$hashed_password')";
-            mysqli_query($DB, $query);
+            $query = "CALL CreateUser($username, $email, $hashed_password)";
+            $result = mysqli_query($DB, $query);
             header("location: /login/Default.php");
         }
     }
@@ -85,20 +85,58 @@ if(isset($_POST['login_user'])){
 
     if(count($errors) == 0){
         $password = md5($password);
-        $find_user_query = "CALL LogInUser('$username', '$password')";
+        $find_user_query = "SELECT * FROM users WHERE username='$username' AND Password='$password'";
         $results = mysqli_query($DB, $find_user_query);
-        $user = mysqli_fetch_assoc($results);
+        $userInfo = mysqli_fetch_assoc($results);
 
-        if(mysqli_num_rows($results) > 1){
+        if(mysqli_num_rows($results) == 1){
+            $userId = $userInfo['users_id'];
+
+            if(empty($userInfo['ip_address']) || is_null($userInfo['ip_address']) || $userInfo['ip_address'] == 0 && empty($userInfo['port']) || is_null($userInfo['port']) || $userInfo['port'] == 0){
+                $ip = GetUserIp();
+                $port = GetUserPort();
+
+                if($ip != $userInfo['ip_address']){
+                    $insert_ip = "UPDATE users SET ip_address='$ip', ip_port='$port' WHERE users_id='$userId' AND username='$username'";
+                    $result = mysqli_query($DB, $insert_ip);
+
+                    $message = "New login into your account from: ".$ip;
+
+                    mail('Ramialhussein98@gmail.com', 'Someone Logged into your account', $message);
+                }
+            }
+
+            $_SESSION['role'] = $userInfo['role'];
             $_SESSION['username'] = $username;
-            $_SESSION['success'] = 'You are now logged in';
-
+            setcookie('userid', $userInfo['users_id'], time() + (60 * 60 * 24 * 30), "/");
+            setcookie('username', $userInfo['username'], time() + (60 * 60 * 24 * 30), "/");
+            setcookie('email', $userInfo['email'], time() + (60 * 60 * 24 * 30), "/");
+            setcookie('password', $userInfo['password'], time() + (60 * 60 * 24 * 30), "/");
 
             header('location: ../index.php');
         }else{
             array_push($errors, "Wrong username/password combination");
         }
     }
+}
+
+function GetUserIp(){
+
+    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+        // IP from shared internet
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        //IP pass from proxy
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }else{
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+
+    return $ip;
+}
+
+function GetUserPort(){
+    return $port = $_SERVER['REMOTE_PORT'];
 }
 
 

@@ -17,11 +17,11 @@ $page_title = "Login";
             <div class="row">
                 <div class="col-md-12">
                     <label>Username</label>
-                    <input class="form-control" type="text" name="username" autocomplete="off" />
+                    <input class="form-control" type="text" name="username" autocomplete="off" value="Ramial" />
                 </div>
                 <div class="col-md-12">
                     <label>Password</label>
-                    <input class="form-control" type="password" name="password" autocomplete="off" />
+                    <input class="form-control" type="password" name="password" autocomplete="off" value="Hassan111" />
                 </div>
                 <div class="col-md-6" style="margin-top: 1em;">
                     <?php include('../errors.php') ?>
