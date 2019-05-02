@@ -106,14 +106,14 @@ if(isset($_GET['logout'])){
                             </div>
                             <div class="col-md-12">
                                 <label>
-                                    Left in stock:  <?php
-                                if($product['quantity'] > 10){
-                                    echo '<strong>10+</strong>';
-                                }else{
-                                    echo '<strong>'.$product['quantity'].'</strong>';
-                                }
-
-                                                    ?>
+                                    Left in stock:
+                                    <?php
+                                        if($product['quantity'] > 10){
+                                            echo '<strong>10+</strong>';
+                                        }else{
+                                            echo '<strong>'.$product['quantity'].'</strong>';
+                                        }
+                                    ?>
                                 </label>
                             </div>
                             <div class="col-md-12">
