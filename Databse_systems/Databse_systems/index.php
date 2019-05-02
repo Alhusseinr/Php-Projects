@@ -5,7 +5,7 @@ $page_title = 'Home';
 
 if(!isset($_SESSION['username'])){
     $_SESSION['msg'] = "You must be logged in to use this site";
-    header('location: /login/Default.php');
+    header('location: ./login/Default.php');
 }else{
     setcookie('login', $_SESSION['username'].','.md5($_SESSION['username'].$secret_word), time() + (86400 * 30));
 }
@@ -13,7 +13,7 @@ if(!isset($_SESSION['username'])){
 if(isset($_GET['logout'])){
     session_destroy();
     unset($_SESSION['username']);
-    header('location: /login/Default.php');
+    header('location: ./login/Default.php');
 }
 
 ?>
