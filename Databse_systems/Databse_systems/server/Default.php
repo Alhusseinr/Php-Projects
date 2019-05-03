@@ -39,7 +39,7 @@ if(isset($_POST['reg_user'])){
     }
 
     // MySql Query checking the DB if the user exists
-    $user_check_query = "CALL CheckIfUserExists($username, $email)";
+    $user_check_query = "CALL CheckIfUserExists('$username', '$email')";
     $result = mysqli_query($DB, $user_check_query);
     $user = mysqli_fetch_assoc($result);
 
@@ -56,10 +56,13 @@ if(isset($_POST['reg_user'])){
 
     try{
         if(count($errors) == 0){
+            $ip = GetUserIp();
+
             // Hashing the password
             $hashed_password = md5($password);
+
             // MySql query to insert into DB
-            $query = "CALL CreateUser($username, $email, $hashed_password)";
+            $query = "CALL CreateUser('$username', '$email', '$hashed_password', '$ip')";
             $result = mysqli_query($DB, $query);
             header("location: /login/Default.php");
         }
@@ -85,7 +88,7 @@ if(isset($_POST['login_user'])){
 
     if(count($errors) == 0){
         $password = md5($password);
-        $find_user_query = "SELECT * FROM users WHERE username='$username' AND Password='$password'";
+        $find_user_query = "CALL CheckIfUserExists('$username', '$email')";
         $results = mysqli_query($DB, $find_user_query);
         $userInfo = mysqli_fetch_assoc($results);
 
@@ -94,10 +97,9 @@ if(isset($_POST['login_user'])){
 
             if(empty($userInfo['ip_address']) || is_null($userInfo['ip_address']) || $userInfo['ip_address'] == 0 && empty($userInfo['port']) || is_null($userInfo['port']) || $userInfo['port'] == 0){
                 $ip = GetUserIp();
-                $port = GetUserPort();
 
                 if($ip != $userInfo['ip_address']){
-                    $insert_ip = "UPDATE users SET ip_address='$ip', ip_port='$port' WHERE users_id='$userId' AND username='$username'";
+                    $insert_ip = "UPDATE users SET ip_address='$ip' WHERE users_id='$userId' AND username='$username'";
                     $result = mysqli_query($DB, $insert_ip);
 
                     $message = "New login into your account from: ".$ip;

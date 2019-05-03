@@ -95,36 +95,73 @@ if(isset($_GET['logout'])){
                             while($product = mysqli_fetch_assoc($products)):
                     ?>
                     <div class="col-sm-4 col-md-3" style="text-align: center;">
-                        <form method="post" action="index.php?action=add&id=id=<?php $product['product_id']; ?>">
-                            <div class="col-md-12">
-                                <img src="<?php echo $product['img']; ?>" class="img-fluid" />
-                            </div>
-                            <div class="col-md-12">
-                                <label>
-                                    <?php echo $product['name']; ?>
-                                </label>
-                            </div>
-                            <div class="col-md-12">
-                                <label>
-                                    Left in stock:  <?php
-                                if($product['quantity'] > 10){
-                                    echo '<strong>10+</strong>';
-                                }else{
-                                    echo '<strong>'.$product['quantity'].'</strong>';
-                                }
+                        <div class="inner">
+                            <form class="formBox" method="post" action="index.php?action=add&id=id=<?php $product['product_id']; ?>">
+                                <div class="col-md-12" style="padding: 0; ">
+                                    <img src="<?php echo $product['img']; ?>" class="img-fluid img-responsive" />
+                                </div>
+                                <div class="row" style="margin-top: 1em;">
+                                    <div class="col-md-6" style="padding: 0;">
+                                        <label>
+                                            <?php echo $product['name']; ?>
+                                        </label>
+                                    </div>
 
-                                                    ?>
-                                </label>
-                            </div>
-                            <div class="col-md-12">
-                                <label>
-                                    <?php echo $product['price']; ?>
-                                </label>
-                            </div>
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-outline-success">Add to cart</button>
-                            </div>
-                        </form>
+                                    <div class="col-md-6">
+                                        <label>
+                                            <?php
+                                                if($product['quantity'] > 10){
+                                                    echo 'Left in stock: <strong>10+</strong>';
+                                                }elseif($product['quantity'] == 0){
+                                                    echo '';
+                                                }else{
+                                                    echo 'Left in stock: <strong>'. $product['quantity'] .'</strong>';
+                                                }
+                                            ?>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>
+                                        Price: <?php echo $product['price']; ?>
+                                    </label>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <?php
+                                                if($product['quantity'] == 0){
+                                                    echo '<a class="btn btn-outline-success disabled" style="color: #28a745;">Add to cart</a>';
+                                                }else{
+                                                    echo '<button type="submit" name="add_to_cart" class="btn btn-outline-success">Add to cart</button>';
+                                                }
+                                            ?>
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <?php if($product['quantity'] == 0): ?>
+                                            <strong style="color: red;">Out of Stock</strong>
+                                            <?php else: ?>
+
+                                            <select class="form-control" name="quantity">
+                                                <?php
+                                                      for($i = 0; $i <= $product['quantity']; $i++){
+                                                          echo '<option>'.$i.'</option>';
+                                                      }
+                                                ?>
+                                            </select>
+
+                                            <?php endif; ?>
+                                            <input type="hidden" name="name" value="<?php echo $product['name'] ?>" />
+                                            <input type="hidden" name="price" value="<?php echo $product['price'] ?>" />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <?php
                             endwhile;

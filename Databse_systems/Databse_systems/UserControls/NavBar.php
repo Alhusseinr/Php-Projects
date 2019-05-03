@@ -43,7 +43,7 @@ $username = $_SESSION['username'];
             </li>
             <?php endif;  ?>
             <li class="nav-item">
-                <a href="account.php" class="btn btn-outline-primary" style="margin-right: .5em;">
+                <a href="./account/Default.php" class="btn btn-outline-primary" style="margin-right: .5em;">
                     <span>Account <?php echo $_SESSION['username'] ?></span>
                 </a>
             </li>
