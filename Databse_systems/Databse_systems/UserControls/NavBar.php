@@ -26,7 +26,7 @@ $username = $_SESSION['username'];
         </ul>
         <ul class="navbar-nav navbar-logo mx-auto">
             <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0" action="Default.php">
+                <form class="form-inline my-2 my-lg-0" action="../search_results/Default.php">
                     <div class="input-group">
                         <input name="searchTerm" type="text" class="form-control" placeholder="Search" autocomplete="off" />
                         <div class="input-group-append">
