@@ -17,6 +17,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="account\Default.php" />
+    <Compile Include="cart\Default.php" />
     <Compile Include="errors.php" />
     <Compile Include="index.php" />
     <Compile Include="login\Default.php" />
@@ -36,6 +37,7 @@
     <Folder Include="account\" />
     <Folder Include="JSON_DATA\" />
     <Folder Include="manage_site\" />
+    <Folder Include="cart\" />
     <Folder Include="register\" />
     <Folder Include="server\" />
     <Folder Include="UserControls\" />

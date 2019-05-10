@@ -1,20 +1,5 @@
 <?php
-session_start();
-
 $page_title = 'Home';
-
-if(!isset($_SESSION['username'])){
-    $_SESSION['msg'] = "You must be logged in to use this site";
-    header('location: ./login/Default.php');
-}else{
-    setcookie('login', $_SESSION['username'].','.md5($_SESSION['username'].$secret_word), time() + (86400 * 30));
-}
-
-if(isset($_GET['logout'])){
-    session_destroy();
-    unset($_SESSION['username']);
-    header('location: ./login/Default.php');
-}
 
 ?>
 
@@ -33,15 +18,13 @@ if(isset($_GET['logout'])){
 
     include('./UserControls/NavBar.php');
 
+    checkLoggedIn();
+
     $query_getProducts = "CALL GetAllProducts";
     $products = mysqli_query($DB, $query_getProducts);
 
     ?>
     <section id="mainBody">
-        <!--<iframe src="https://vlipsy.com/embed/J1JL9As0?loop=1&sharing=0" style="height:100%; width:100%;" frameborder="0"></iframe>-->
-        <!--<video autoplay muted loop id="">
-            <source src="https://www.youtube.com/watch?v=NmS9ZX9O5bw" />
-        </video>-->
         <div class="mainBanner" style="margin-top: 3.5em;">
             <div class="row">
                 <div class="col-md-6" style="text-align: center;">
@@ -71,7 +54,7 @@ if(isset($_GET['logout'])){
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3" style="text-align: left !important; margin: .5em 0 .5em 0;">
-                                        <button type="submit" class="btn btn-outline-success">Register</button>
+                                        <button type="submit" name="reg_user" class="btn btn-outline-success">Register</button>
                                     </div>
                                     <div class="col-md-9 align-self-center" style="text-align: right !important; margin: .5em 0 .5em 0;">
                                         already have an account
@@ -92,17 +75,21 @@ if(isset($_GET['logout'])){
 
                     if($products):
                         if(mysqli_num_rows($products) > 0):
-                            while($product = mysqli_fetch_assoc($products)):
+                            while($count < 8 && $product = mysqli_fetch_assoc($products)):
                     ?>
                     <div class="col-sm-4 col-md-3" style="text-align: center;">
                         <div class="inner">
-                            <form class="formBox" method="post" action="index.php?action=add&id=id=<?php $product['product_id']; ?>">
+                            <form class="formBox" method="post" action="index.php">
+                                <input type="hidden" name="product_id_h" value="<?php echo $product['product_id'] ?>" />
+                                <input type="hidden" name="product_name_h" value="<?php echo $product['name']; ?>" />
+                                <input type="hidden" name="product_price_h" value="<?php echo $product['price']; ?>" />
+
                                 <div class="col-md-12" style="padding: 0; ">
                                     <img src="<?php echo $product['img']; ?>" class="img-fluid img-responsive" />
                                 </div>
                                 <div class="row" style="margin-top: 1em;">
                                     <div class="col-md-6" style="padding: 0;">
-                                        <label>
+                                        <label id="product_name" name="product_name">
                                             <?php echo $product['name']; ?>
                                         </label>
                                     </div>
@@ -110,32 +97,31 @@ if(isset($_GET['logout'])){
                                     <div class="col-md-6">
                                         <label>
                                             <?php
-                                                if($product['quantity'] > 10){
-                                                    echo 'Left in stock: <strong>10+</strong>';
-                                                }elseif($product['quantity'] == 0){
-                                                    echo '';
-                                                }else{
-                                                    echo 'Left in stock: <strong>'. $product['quantity'] .'</strong>';
-                                                }
+                                if($product['quantity'] > 10){
+                                    echo 'Left in stock: <strong>10+</strong>';
+                                }elseif($product['quantity'] == 0){
+                                    echo '';
+                                }else{
+                                    echo 'Left in stock: <strong>'. $product['quantity'] .'</strong>';
+                                }
                                             ?>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label>
+                                    <label name="product_price" id="product_price">
                                         Price: <?php echo $product['price']; ?>
                                     </label>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
-
                                             <?php
-                                                if($product['quantity'] == 0){
-                                                    echo '<a class="btn btn-outline-success disabled" style="color: #28a745;">Add to cart</a>';
-                                                }else{
-                                                    echo '<button type="submit" name="add_to_cart" class="btn btn-outline-success">Add to cart</button>';
-                                                }
+                                if($product['quantity'] == 0){
+                                    echo '<a class="btn btn-outline-success disabled" style="color: #28a745;">Add to cart</a>';
+                                }else{
+                                    echo '<button type="submit" name="add_to_cart" class="btn btn-outline-success">Add to cart</button>';
+                                }
                                             ?>
 
                                         </div>
@@ -145,25 +131,24 @@ if(isset($_GET['logout'])){
                                             <strong style="color: red;">Out of Stock</strong>
                                             <?php else: ?>
 
-                                            <select class="form-control" name="quantity">
+                                            <select class="form-control" name="quantity" id="quantity">
                                                 <?php
-                                                      for($i = 0; $i <= $product['quantity']; $i++){
+                                                      for($i = 1; $i <= $product['quantity']; $i++){
                                                           echo '<option>'.$i.'</option>';
                                                       }
                                                 ?>
                                             </select>
 
                                             <?php endif; ?>
-                                            <input type="hidden" name="name" value="<?php echo $product['name'] ?>" />
-                                            <input type="hidden" name="price" value="<?php echo $product['price'] ?>" />
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <?php
+                                $count++;
                             endwhile;
                         endif;
                     endif;
@@ -174,7 +159,5 @@ if(isset($_GET['logout'])){
     </section>
     <?php include('./UserControls/bottomScripts.php'); ?>
     <?php include('./UserControls/Footer.php'); ?>
-
-    <script></script>
 </body>
 </html>

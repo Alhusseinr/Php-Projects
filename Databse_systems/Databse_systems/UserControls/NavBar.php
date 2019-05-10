@@ -15,7 +15,7 @@ $username = $_SESSION['username'];
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav pull-sm-left">
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../index.php">
                     Home
                     <span class="sr-only">(current)</span>
                 </a>
@@ -48,7 +48,7 @@ $username = $_SESSION['username'];
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="btn btn-outline-info my-2 my-sm-0" style="margin-right:.5em;">
+                <a href="./cart/Default.php" class="btn btn-outline-info my-2 my-sm-0" style="margin-right:.5em;">
                     <i class="fas fa-shopping-cart"></i> Cart
                 </a>
             </li>

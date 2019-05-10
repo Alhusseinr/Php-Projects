@@ -200,3 +200,9 @@ html {
     box-shadow: 0 15px 40px rgba(64,67,69,.17);
     border-radius: 0px 0px 5px 5px;
 }
+
+table td[class*=col-], table th[class*=col-] {
+    position: static;
+    display: table-cell;
+    float: none;
+}

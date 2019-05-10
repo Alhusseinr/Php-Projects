@@ -32,7 +32,7 @@ $page_title = "Register";
                     <input class="form-control" type="email" name="email" autocomplete="off" />
                 </div>
                 <div class="col-md-6" style="margin-top: 1em;">
-                    <?php include('errors.php') ?>
+                    <?php include('../errors.php') ?>
                 </div>
                 <div class="col-md-6 text-right" style="margin-top: 1em;">
                     <button type="submit" class="btn btn-outline-primary" name="reg_user">Register</button>
