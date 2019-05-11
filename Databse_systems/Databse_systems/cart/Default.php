@@ -48,22 +48,36 @@ $page_title = 'Cart';
             <table style="width:100%;">
                 <thead>
                     <tr class="row" style="margin-bottom: 1em;">
-                        <th scope="col" style="text-align: center;" class="col-md-4 align-self-center">Product</th>
-                        <th scope="col" style="text-align: center;" class="col-md-4 align-self-center">Price</th>
-                        <th scope="col" style="text-align: center;" class="col-md-4 align-self-center">Quantity</th>
+                        <th scope="col" style="text-align: left;" class="col-md-6 align-self-center"></th>
+                        <th scope="col" style="text-align: center;" class="col-md-3 align-self-center">Price</th>
+                        <th scope="col" style="text-align: center;" class="col-md-3 align-self-center">Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="row" style="margin-bottom: 1em;">
+                    <tr class="row" style="margin-bottom: 1em;" >
                         <?php
                         if($run):
                             if(mysqli_num_rows($run) > 0):
                                 while($data = mysqli_fetch_assoc($run)):
                         ?>
                        
-                        <td class="col-md-4 align-self-center" style="text-align: center; margin-bottom: 2.5em;"><img src="<?php echo $data['img'] ?>" /> <input type="hidden" id="proId" value="<?php echo $data['product_id'] ?>" /></td>
-                        <td class="col-md-4 align-self-center" style="text-align: center; margin-bottom: 2.5em;"><?php echo $data['cart_price'] ?> $</td>
-                        <td class="col-md-4 align-self-center" style="text-align: center; margin-bottom: 2.5em;">
+                        <td class="col-md-6 align-self-center" style="text-align: left; margin-bottom: 2.5em;">
+                            <div class="row" style="margin-left: -15px; margin-right: -15px;">
+                                <div class="col-md-4" style="text-align: center;">
+                                    <img src="../images/<?php echo $data['img'] ?>" class="img-thumbnail" style="height: 10em;" /><input type="hidden" id="proId" value="<?php echo $data['product_id'] ?>" />
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                       <h4><?php echo $data['productName'] ?></h4> 
+                                    </div>
+                                    <div class="row" style="margin-top: 1em;">
+                                        <button name="remove" class="link" style="padding: 0 15px 0 0;">Delete</button> <label style="color: lightgray; margin: 0;">|</label> <button name="addToLater" class="link" style="padding: 0 0 0 15px;">Save for later</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-md-3 align-self-center" style="text-align: center; margin-bottom: 2.5em;">$<?php echo $data['cart_price'] ?> </td>
+                        <td class="col-md-3 align-self-center" style="text-align: center; margin-bottom: 2.5em;">
                             <select id="qtyRemove" class="form-control" style="width: 5em; margin: 0 auto;">
                                 <?php
                                     for($i = $data['cart_qty']; $i >= 1; $i--):
@@ -89,15 +103,8 @@ $page_title = 'Cart';
                 </tbody>
             </table>
         </div>
-        <div class="col-md-4" style="margin-top: .5em;">
-            <div class="boxTop" style="border: 1px solid lightgrey; margin-bottom:1em; border-radius: 3px; padding: 1em;">
-                <h3>Subtotal ( <?php echo $TotalItems ?> items ): $<?php echo $TotalPrice ?> </h3><br />
-            </div>
-
-            <div class="boxBottom" style="border: 1px solid lightgrey;">
-                Random items
-            </div>
-
+        <div class="col-md-4" style="text-align: right;">
+            <h3>Subtotal ( <?php echo $TotalItems ?> items ): $<?php echo $TotalPrice ?> </h3>
         </div>
     </div>
     <?php include('./UserControls/bottomScripts.php'); ?>

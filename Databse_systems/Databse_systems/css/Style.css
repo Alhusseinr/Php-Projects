@@ -206,3 +206,17 @@ table td[class*=col-], table th[class*=col-] {
     display: table-cell;
     float: none;
 }
+
+.link {
+    background-color: transparent;
+    border: none;
+    color: blue;
+
+}
+
+    .link:hover {
+        text-decoration: underline;
+    }
+    .link:focus {
+        outline: none !important;
+    }

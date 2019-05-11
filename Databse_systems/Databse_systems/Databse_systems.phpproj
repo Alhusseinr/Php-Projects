@@ -8,6 +8,8 @@
     </RootNamespace>
     <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
     <AssemblyName>Databse_systems</AssemblyName>
+    <SpecificPageValue>images/</SpecificPageValue>
+    <StartAction>SpecificPage</StartAction>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <IncludeDebugInformation>true</IncludeDebugInformation>
@@ -45,6 +47,9 @@
   <ItemGroup>
     <Content Include="css\Style.css" />
     <Content Include="favicon.ico" />
+    <Content Include="images\crystalr2d2.jpg" />
+    <Content Include="images\mainBanner.jpg" />
+    <Content Include="images\starwars.jpg" />
     <Content Include="JSON_DATA\swapi.json" />
   </ItemGroup>
 </Project>

@@ -37,7 +37,7 @@ $username = $_SESSION['username'];
             </li>
         </ul>
         <ul class="navbar-nav pull-sm-right">
-            <?php if($_SESSION['role'] == 'admin'): ?>
+            <?php if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'Supervisor'): ?>
             <li class="nav-item">
                 <a href="./manage_site/Default.php" class="btn btn-outline-secondary" style="margin-right: .5em;">Manage Site</a>
             </li>
