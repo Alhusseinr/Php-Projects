@@ -123,8 +123,9 @@ if(isset($_POST['add_to_cart'])){
     if(mysqli_num_rows($checkCart) > 0){
         //update cart qty
         $price = getCartPrice($product_quantity, $product_price);
-        $updateCart = "UPDATE cart_product SET cart_qty = cart_qty + '$product_quantity', cart_price = cart_price + '$price'";
+        $updateCart = "UPDATE cart_product SET cart_qty = cart_qty + '$product_quantity', cart_price = cart_price + '$price' WHERE userId='$loggedInUserId' AND product_id='$productId'";
         $run = mysqli_query($DB, $updateCart);
+        header('location: ./cart/Default.php');
     }else{
         $addingIntoProduct = "INSERT INTO cart_product(product_id, cart_qty, cart_price, productName, userId)
                             VALUES('$productId', '$product_quantity', '$cart_price', '$product_name', '$loggedInUserId')";
@@ -133,6 +134,7 @@ if(isset($_POST['add_to_cart'])){
         if($run1 = true){
             $addingIntoCart = "INSERT INTO cart(users_id, cart_product_id) VALUES('$loggedInUserId', (SELECT cart_product_id FROM cart_product where userId='$loggedInUserId'))";
             $run2 = mysqli_query($DB, $addingIntoCart);
+            header('location: ./cart/Default.php');
         }
     }
 }
@@ -157,14 +159,12 @@ if($_POST['ProductQty'] && $_POST['ProductId']){
 
 function updateCart($newProductQty, $proId, $userId){
     global $DB;
+    global $productPrice;
 
     if($newProductQty > 0){
-        $proPrice = getCartPrice($newProductQty, $proId);
+        $proPrice = getCartPrice($newProductQty, $productPrice);
         $updateCart = "UPDATE cart_product SET cart_qty = cart_qty - '$newProductQty', cart_price = cart_price - '$proPrice' WHERE userId = '$userId' AND product_id = '$proId'";
         $run = mysqli_query($DB, $updateCart);
-    }else if($newProductQty = 0){
-        $deleteFromCart = "DELETE FROM cart_product WHERE userId = '$userId' AND product_id = '$proId'";
-        $run2 = mysqli_query($DB, $deleteFromCart);
     }
 
 }
@@ -210,6 +210,41 @@ function getUserInfo($username, $email){
     $data = mysqli_fetch_assoc($run);
 
     return $data;
+}
+
+function getItemsTotal(){
+    global $DB;
+
+    $userInfo = getUserInfo($_SESSION['username'], $_SESSION['email']);
+    $userId = $userInfo['users_id'];
+    $getItemsQty = "SELECT * FROM cart_product WHERE userId = '$userId'";
+    $getItems = mysqli_query($DB, $getItemsQty);
+
+    $total = 0;
+
+    while($data = mysqli_fetch_assoc($getItems)){
+        $total += $data['cart_qty'];
+    }
+
+    return $total;
+
+}
+
+function getTotalPrice(){
+    global $DB;
+
+    $userInfo = getUserInfo($_SESSION['username'], $_SESSION['email']);
+    $userId = $userInfo['users_id'];
+    $getItemsQty = "SELECT * FROM cart_product WHERE userId = '$userId'";
+    $getItems = mysqli_query($DB, $getItemsQty);
+
+    $total = 0;
+
+    while($data = mysqli_fetch_assoc($getItems)){
+        $total += $data['cart_price'];
+    }
+
+    return $total;
 }
 
 

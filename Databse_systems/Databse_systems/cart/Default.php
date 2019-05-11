@@ -24,10 +24,9 @@ $page_title = 'Cart';
                 // Ajax to call the PHP function
                 $.post('Default.php', { ProductQty: productQty, ProductId: proId }, function (data) {
                     alert('ajax completed. Response: ' + data);
-                })
-            })
-        })
-
+                });
+            });
+        });
     </script>
 </head>
 <body>
@@ -37,6 +36,8 @@ $page_title = 'Cart';
     global $DB;
 
     $userId = checkLoggedIn();
+    $TotalItems = getItemsTotal();
+    $TotalPrice = getTotalPrice();
 
     $getCart = "SELECT * FROM cart INNER JOIN cart_product INNER JOIN products ON cart.users_id = cart_product.userId AND cart_product.product_id = products.product_id ";
 
@@ -47,10 +48,9 @@ $page_title = 'Cart';
             <table style="width:100%;">
                 <thead>
                     <tr class="row" style="margin-bottom: 1em;">
-                        <th scope="col" style="text-align: center;" class="col-md-3 align-self-center">Product</th>
-                        <th scope="col" style="text-align: center;" class="col-md-3 align-self-center">Price</th>
-                        <th scope="col" style="text-align: center;" class="col-md-3 align-self-center">Quantity</th>
-                        <th class="col-md-3"></th>
+                        <th scope="col" style="text-align: center;" class="col-md-4 align-self-center">Product</th>
+                        <th scope="col" style="text-align: center;" class="col-md-4 align-self-center">Price</th>
+                        <th scope="col" style="text-align: center;" class="col-md-4 align-self-center">Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,10 +61,10 @@ $page_title = 'Cart';
                                 while($data = mysqli_fetch_assoc($run)):
                         ?>
                        
-                        <td class="col-md-3 align-self-center" style="text-align: center;"><img src="<?php echo $data['img'] ?>" /> <input type="hidden" id="proId" value="<?php echo $data['product_id'] ?>" /></td>
-                        <td class="col-md-3 align-self-center" style="text-align: center;"><?php echo $data['cart_price'] ?> $</td>
-                        <td class="col-md-3 align-self-center" style="text-align: center;">
-                            <select id="qtyRemove" class="form-control">
+                        <td class="col-md-4 align-self-center" style="text-align: center; margin-bottom: 2.5em;"><img src="<?php echo $data['img'] ?>" /> <input type="hidden" id="proId" value="<?php echo $data['product_id'] ?>" /></td>
+                        <td class="col-md-4 align-self-center" style="text-align: center; margin-bottom: 2.5em;"><?php echo $data['cart_price'] ?> $</td>
+                        <td class="col-md-4 align-self-center" style="text-align: center; margin-bottom: 2.5em;">
+                            <select id="qtyRemove" class="form-control" style="width: 5em; margin: 0 auto;">
                                 <?php
                                     for($i = $data['cart_qty']; $i >= 1; $i--):
                                 ?>
@@ -74,13 +74,8 @@ $page_title = 'Cart';
                                 <?php 
                                     endfor; 
                                 ?>
-
-                                <option value="0">Remove</option>
                             </select>
 
-                        </td>
-                        <td class="col-md-3 align-self-center" style="text-align: center;">
-                            <button name="remove_from_cart" class="btn btn-outline-danger">Remove from cart</button>
                         </td>
 
 
@@ -95,8 +90,8 @@ $page_title = 'Cart';
             </table>
         </div>
         <div class="col-md-4" style="margin-top: .5em;">
-            <div class="boxTop" style="border: 1px solid lightgrey; margin-bottom:1em;">
-                Total and checkout
+            <div class="boxTop" style="border: 1px solid lightgrey; margin-bottom:1em; border-radius: 3px; padding: 1em;">
+                <h3>Subtotal ( <?php echo $TotalItems ?> items ): $<?php echo $TotalPrice ?> </h3><br />
             </div>
 
             <div class="boxBottom" style="border: 1px solid lightgrey;">
