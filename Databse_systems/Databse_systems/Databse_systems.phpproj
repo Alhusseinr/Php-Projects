@@ -1,0 +1,59 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Name>Databse_systems</Name>
+    <ProjectGuid>61e5f9ca-ae79-4823-affa-5011ab6dfb32</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>
+    </RootNamespace>
+    <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
+    <AssemblyName>Databse_systems</AssemblyName>
+    <SpecificPageValue>images/</SpecificPageValue>
+    <StartAction>SpecificPage</StartAction>
+    <Runtime>PHP</Runtime>
+    <RuntimeVersion>7.1</RuntimeVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <IncludeDebugInformation>true</IncludeDebugInformation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <IncludeDebugInformation>false</IncludeDebugInformation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="account\Default.php" />
+    <Compile Include="cart\Default.php" />
+    <Compile Include="errors.php" />
+    <Compile Include="index.php" />
+    <Compile Include="login\Default.php" />
+    <Compile Include="manage_site\Default.php" />
+    <Compile Include="recipts\Default.php" />
+    <Compile Include="register\Default.php" />
+    <Compile Include="server\Default.php" />
+    <Compile Include="UserControls\bottomScripts.php" />
+    <Compile Include="UserControls\Footer.php" />
+    <Compile Include="UserControls\NavBar.php" />
+    <Compile Include="UserControls\topScripts.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="css\" />
+    <Folder Include="images\" />
+    <Folder Include="js\" />
+    <Folder Include="login\" />
+    <Folder Include="account\" />
+    <Folder Include="JSON_DATA\" />
+    <Folder Include="manage_site\" />
+    <Folder Include="cart\" />
+    <Folder Include="recipts\" />
+    <Folder Include="register\" />
+    <Folder Include="server\" />
+    <Folder Include="UserControls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\Style.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="images\crystalr2d2.jpg" />
+    <Content Include="images\mainBanner.jpg" />
+    <Content Include="images\starwars.jpg" />
+    <Content Include="JSON_DATA\swapi.json" />
+  </ItemGroup>
+</Project>

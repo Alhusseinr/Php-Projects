@@ -1,7 +1,13 @@
 <?php
-// Register
+
+    isset($_SESSION['username']) ? '' : session_start();
+
+    //    if(isset($_SESSION['username'])){} else if(!isset($_SESSION['username'])){
+    //        session_start();
+    //    }
 
     // my vars
+
     $Fname;
     $Lname;
     $username;
@@ -9,6 +15,7 @@
     $gender;
     $email;
     $searchTerm;
+    $role;
     $errors = array();
 
     // db connection
@@ -22,25 +29,27 @@
         $gender = mysqli_real_escape_string($db, $_POST['Gender']);
         $username = mysqli_real_escape_string($db, $_POST['username']);
         $email = mysqli_real_escape_string($db, $_POST['email']);
+        $role = mysqli_real_escape_string($db, $_POST['role']);
         $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
         $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
 
 
         // Validation
-        if(empty($Fname)){array_push($errors, "First Name is required");}
-        if(empty($Lname)){array_push($errors, "Last Name is required");}
-        if(empty($gender)){array_push($errors, "gender is required");}
-        if(empty($username)) {array_push($errors, "Username is required"); }
-        if(empty($email)) {array_push($errors, "email is required"); }
-        if(empty($password_1)) {array_push($errors, "Password is required"); }
+        if(empty($username)) {
+            array_push($errors, "Username is required");
+        }
+        if(empty($email)) {
+            array_push($errors, "Email is required");
+        }
+        if(empty($password_1)) {
+            array_push($errors, "Password is required");
+        }
         if($password_1 != $password_2){
-            array_push($errors, "Passwords does not match");
+            array_push($errors, "Passwords do not match");
         }
 
-
-
         // Checking the db if the user exists
-        $user_check_array = "SELECT * FROM user WHERE username='$username' OR email='$email' LIMIT 1";
+        $user_check_array = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
         $result = mysqli_query($db, $user_check_array);
         $user = mysqli_fetch_assoc($result);
 
@@ -58,21 +67,21 @@
             if(count($errors) == 0){
                 $password = md5($password_1);
 
-                $query = "INSERT INTO user(Fname, Lname, Password, email, order_id, Gender, role, username) VALUES('$Fname', '$Lname', '$password', '$email', null, '$Gender', '$role', '$username')";
+                $query = "INSERT INTO users(username, Password, email, role) VALUES('$username', '$password', '$email', '$role')";
                 mysqli_query($db, $query);
                 $_SESSION['username'] = $username;
-                $_SESSION['success'] = "You are now logged in";
-                header('location: index.php');
+                header('location: login.php');
             }
         }catch(Exception $e){
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
     }
 
-// Login
+    // Login
     if(isset($_POST['login_user'])){
         $username = mysqli_real_escape_string($db, $_POST['username']);
         $password = mysqli_real_escape_string($db, $_POST['password']);
+        $secret_word = 'ramis project';
 
         if(empty($username)){
             array_push($errors, "Username is required");
@@ -84,12 +93,16 @@
 
         if(count($errors) == 0){
             $password = md5($password);
-            $query = "SELECT * FROM user WHERE username='$username' AND password='$password'";
+            $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
             $results = mysqli_query($db, $query);
+            $users = mysqli_fetch_assoc($results);
 
-            if(mysqli_num_rows($results) == 1){
-                $_SESSION['username'] = $username;
-                $_SESSION['success'] = 'You are now logged in';
+            if(mysqli_num_rows($results) == 1 && pc_validate($users['username'], $users['Password'])){
+                setcookie('login', $users['username'].','.md5($users['username'].$secret_word), time() + (86400 * 30));
+
+                // $_SESSION['username'] = $username;
+                // $_SESSION['success'] = 'You are now logged in';
+
                 header('location: index.php');
             }else{
                 array_push($errors, "Wrong username/password combination");
@@ -97,10 +110,12 @@
         }
     }
 
-// Search
+
+
+    // Search
     if(isset($_POST['searchSubmit'])){
         $searchTerm = $_GET['searchTerm']; // Gets the data from the client-side
-        $searchTerm = htmlspecialchars($searchTerm); // Transforms e2verything from Html to actual text
+        $searchTerm = htmlspecialchars($searchTerm); // Transforms everything from Html to actual text
         $searchTerm = mysqli_real_escape_string($db, $_POST['searchTerm']); // Helps against SQL injections
 
         $searchQuery = "SELECT * FROM Products WHERE(`name` LIKE `%".$searchTerm."%`) OR ('description' LIKE `%".$searchTerm."%`)";
@@ -111,6 +126,19 @@
                 echo $results;
             }
         }
+    }
 
 
+    // Verify a user function
+    function pc_validate($user,$pass){
+        $users = array($user => $pass);
+        if(isset($users[$user]) && ($users[$user] == $pass)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function onLogin($user){
+        $token = md5(uniqid(rand(), true));
     }

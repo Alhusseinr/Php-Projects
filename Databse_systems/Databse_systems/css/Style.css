@@ -1,0 +1,225 @@
+﻿:root {
+    --primaryColor: #569d68;
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+}
+
+/* Start of nav css */
+.btnToggle {
+    background-color: white;
+}
+
+.navbar-primaryColor {
+    background-color: var(--primaryColor);
+    /* webkit-box-shadow: 0 10px 35px 0px lightgray;
+    -moz-box-shadow: 0 10px 35px 0px lightgray;
+    box-shadow: 0 10px 35px 0px lightgray; */
+}
+
+    .navbar-primaryColor a {
+        color: white;
+    }
+
+.btn-outline-white {
+    color: white;
+    border-color: white;
+}
+
+    .btn-outline-white:hover {
+        color: black;
+        background-color: white;
+    }
+/* End of nav css */
+
+/* Start of Main Page css */
+
+.mainBanner {
+    height: 100%;
+    background: url(https://media1.giphy.com/media/9DrieuSvJj3YdAaFtG/source.gif);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.gradient {
+    height: 100%;
+}
+
+.txtWhite {
+    color: white;
+}
+
+.img {
+    height: 100%;
+}
+
+.productBox {
+    height: 100%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.productImg {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+.productDesc {
+    padding: 0.5em;
+}
+/* End of Main Page css */
+
+/* Manipulating Bootstrap classes */
+.navbar-brand {
+    padding-top: 0px;
+}
+
+.nav-link {
+    margin-right: 0.5rem;
+}
+
+    .nav-link:hover {
+        transition: 0.3s;
+        color: lightgray;
+    }
+
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+.form-control:focus {
+    outline: none !important;
+}
+
+.pnl {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    width: 30em;
+    margin-top: 2em !important;
+    margin: 0 auto;
+}
+
+    .pnl h1 {
+        text-align: center;
+        padding-top: .25em;
+    }
+
+
+    .pnl .boxes {
+        padding: 0 2em;
+    }
+
+        .pnl .boxes label {
+            text-align: left !important;
+        }
+
+#filter ul {
+    padding: 0px;
+}
+
+    #filter ul li {
+        list-style: none;
+    }
+
+.active-pink-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+.active-pink input[type=text] {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+.active-purple-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-purple input[type=text] {
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-cyan-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+}
+
+.active-cyan input[type=text] {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+}
+
+.active-cyan .fa, .active-cyan-2 .fa {
+    color: #4dd0e1;
+}
+
+.active-purple .fa, .active-purple-2 .fa {
+    color: #ce93d8;
+}
+
+.active-pink .fa, .active-pink-2 .fa {
+    color: #f48fb1;
+}
+
+.row {
+    margin: 0;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+
+.inner {
+    margin-top:3em;
+    margin-bottom: 3em;
+}
+
+.formBox {
+    background-color: #f8f9fa;
+    margin: 0;
+    padding-bottom: 1em;
+    box-shadow: 0 15px 40px rgba(64,67,69,.17);
+    border-radius: 0px 0px 5px 5px;
+}
+
+table td[class*=col-], table th[class*=col-] {
+    position: static;
+    display: table-cell;
+    float: none;
+}
+
+.link {
+    background-color: transparent;
+    border: none;
+    color: blue;
+
+}
+
+    .link:hover {
+        text-decoration: underline;
+    }
+    .link:focus {
+        outline: none !important;
+    }
+
+.card-img-top {
+    height: 25em;
+}
