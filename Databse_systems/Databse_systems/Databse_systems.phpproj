@@ -25,6 +25,7 @@
     <Compile Include="login\Default.php" />
     <Compile Include="manage_site\Default.php" />
     <Compile Include="register\Default.php" />
+    <Compile Include="search_results\Default.php" />
     <Compile Include="server\Default.php" />
     <Compile Include="UserControls\bottomScripts.php" />
     <Compile Include="UserControls\Footer.php" />
@@ -41,6 +42,7 @@
     <Folder Include="manage_site\" />
     <Folder Include="cart\" />
     <Folder Include="register\" />
+    <Folder Include="search_results\" />
     <Folder Include="server\" />
     <Folder Include="UserControls\" />
   </ItemGroup>
