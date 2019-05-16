@@ -1,6 +1,13 @@
 <?php
 
+
+
 require(dirname(__FILE__)."../../server/Default.php");
+
+
+if(!isset($_SESSION['username'])){
+    header("location: /login/Default.php");
+}
 
 $username = $_SESSION['username'];
 

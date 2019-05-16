@@ -60,21 +60,21 @@ $page_title = 'Cart';
                             if(mysqli_num_rows($run) > 0):
                                 while($data = mysqli_fetch_assoc($run)):
                         ?>
-                       
+                      
                         <td class="col-md-6 align-self-center" style="text-align: left; margin-bottom: 2.5em;">
-                            <div class="row" style="margin-left: -15px; margin-right: -15px;">
-                                <div class="col-md-4" style="text-align: center;">
-                                    <img src="../images/<?php echo $data['img'] ?>" class="img-thumbnail" style="height: 10em;" /><input type="hidden" id="proId" value="<?php echo $data['product_id'] ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                       <h4><?php echo $data['productName'] ?></h4> 
+                                <div class="row" style="margin-left: -15px; margin-right: -15px;">
+                                    <div class="col-md-4" style="text-align: center;">
+                                        <img src="../images/<?php echo $data['img'] ?>" class="img-thumbnail" style="height: 10em;" /><input type="hidden" name="proId" value="<?php echo $data['product_id'] ?>" />
                                     </div>
-                                    <div class="row" style="margin-top: 1em;">
-                                        <button name="remove" class="link" style="padding: 0 15px 0 0;">Delete</button> <label style="color: lightgray; margin: 0;">|</label> <button name="addToLater" class="link" style="padding: 0 0 0 15px;">Save for later</button>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                           <h4><?php echo $data['productName'] ?></h4> 
+                                        </div>
+                                        <div class="row" style="margin-top: 1em;">
+                                            <button name="remove" class="link" style="padding: 0 15px 0 0;">Delete</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </td>
                         <td class="col-md-3 align-self-center" style="text-align: center; margin-bottom: 2.5em;">$<?php echo $data['cart_price'] ?> </td>
                         <td class="col-md-3 align-self-center" style="text-align: center; margin-bottom: 2.5em;">
@@ -92,7 +92,7 @@ $page_title = 'Cart';
 
                         </td>
 
-
+                        
 
                         <?php
                                 endwhile;
@@ -105,6 +105,32 @@ $page_title = 'Cart';
         </div>
         <div class="col-md-4" style="text-align: right;">
             <h3>Subtotal ( <?php echo $TotalItems ?> items ): $<?php echo $TotalPrice ?> </h3>
+            <form method="post" action="../cart/Default.php" >
+                
+                <input type="number" name="total" value="<?php echo $TotalPrice ?>" hidden />
+                <div class="form-group" style="text-align: left;">
+                    <label>Address 1:</label>
+                    <input name="address1" class="form-control" />
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label>Address 2:</label>
+                    <input name="address2" class="form-control" />
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label>Zip Code:</label>
+                    <input name="post_code" class="form-control" />
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label>City:</label>
+                    <input name="city" class="form-control" />
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label>State:</label>
+                    <input name="state" class="form-control" />
+                </div>
+
+                <button type="submit" name="checkout" class="btn btn-success" style="text-align: left;">Checkout</button>
+            </form>
         </div>
     </div>
     <?php include('./UserControls/bottomScripts.php'); ?>

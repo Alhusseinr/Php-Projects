@@ -40,7 +40,7 @@ if(isset($_POST['reg_user'])){
     if(count($errors) == 0){
         $ip = GetUserIp();
         $hashed_password = md5($password);
-        $addIntoDB = "CALL CreateUser('$username', '$email', '$hashed_password', '$ip')";
+        $addIntoDB = "INSERT INTO users (username, email, Password, ip_add) VALUES('$username', '$email', '$hashed_password', '$ip')";
         $run = mysqli_query($DB, $addIntoDB);
 
         if($run = true){
@@ -64,7 +64,7 @@ if(isset($_POST['login_user'])){
 
     if(count($errors) == 0){
         $password = md5($password);
-        $find_user_query = "CALL CheckIfUserExists('$username', '$email')";
+        $find_user_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1;";
         $results = mysqli_query($DB, $find_user_query);
         $userInfo = mysqli_fetch_assoc($results);
 
@@ -153,6 +153,71 @@ if($_POST['ProductQty'] && $_POST['ProductId']){
     $userData = getUserInfo($username, $email);
     $userId = $userData['users_id'];
     updateCart($newProductQty, $proId, $userId);
+}
+
+if(isset($_POST['checkout'])){
+
+    $userId = $_SESSION['users_id'];
+    $orderTotal = mysqli_real_escape_string($DB, $_POST['total']);
+
+    $address1 = mysqli_real_escape_string($DB, $_POST['address1']);
+    $address2 = mysqli_real_escape_string($DB, $_POST['address2']);
+    $post_code = mysqli_real_escape_string($DB, $_POST['post_code']);
+    $city = mysqli_real_escape_string($DB, $_POST['city']);
+    $state = mysqli_real_escape_string($DB, $_POST['state']);
+
+    $selectFromADD = "SELECT users_id FROM address WHERE users_id='$userId'";
+    $r = mysqli_query($DB, $selectFromADD);
+
+    if(mysqli_num_rows($r) > 0){
+
+    }else{
+        $insertIntoAddress = "INSERT INTO address(address1, address2, post_code, city, state, users_id) VALUES('$address1', '$address2', '$post_code', '$city', '$state', '$userId')";
+        $s = mysqli_query($DB, $insertIntoAddress);
+
+        $updateUsers = "UPDATE users SET address_id=(SELECT address_id FROM address WHERE users_id='$userId')";
+        $h = mysqli_query($DB, $updateUsers);
+    }
+
+    $insertIntoCart = "INSERT INTO orders(address_id, users_id, totalPrice) VALUES((SELECT address_id FROM address WHERE users_id='$userId'), '$userId', '$orderTotal')";
+    $addCart = mysqli_query($DB, $insertIntoCart);
+
+    $setCart = "SELECT * FROM cart INNER JOIN cart_product INNER JOIN products ON cart.users_id = cart_product.userId AND cart_product.product_id = products.product_id WHERE users_id='$userId'";
+    $run = mysqli_query($DB, $setCart);
+
+    while($products = mysqli_fetch_assoc($run)){
+        $productName = mysqli_real_escape_string($DB, $products['productName']);
+        $productQty = mysqli_real_escape_string($DB, $products['cart_qty']);
+        $productPrice = mysqli_real_escape_string($DB, $products['price']);
+        $productId = mysqli_real_escape_string($DB, $products['prodcut_id']);
+
+        $addintoorderdetails = "INSERT INTO orders_detail(order_id, users_id, product_name, product_quantity, product_price) VALUES((SELECT order_id FROM orders WHERE users_id='$userId'), '$userId', '$productName', '$productQty', '$productPrice')";
+        $add = mysqli_query($DB, $addintoorderdetails);
+
+        $removeFromProducts = "UPDATE products SET quantity = quantity - '$productQty' WHERE product_id='$productId'";
+        $minus = mysqli_query($DB, $addintoorderdetails);
+    }
+
+    if($add = true){
+        $updateOrders = "UPDATE orders SET order_detail_id=(SELECT orders_detail_id FROM orders_detail WHERE users_id='$userId')";
+        $update = mysqli_query($DB, $updateOrders);
+
+        if($update = true){
+            $removeFromCart = "DELETE FROM cart WHERE users_id='$userId'";
+            $f = mysqli_query($DB, $removeFromCart);
+
+            $removeFromCartPro = "DELETE FROM cart_product WHERE userId='$userId'";
+            $g = mysqli_query($DB, $removeFromCartPro);
+
+            header('location: ../recipts/Default.php');
+        }
+    }
+}
+
+if(isset($_POST['remove'])){
+    $productId = mysqli_real_escape_string($DB, $_POST['proId']);
+
+    $delete = "DELETE FROM cart_product WHERE product_id='$productId'";
 }
 
 // Functions
